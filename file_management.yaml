@@ -1,0 +1,19 @@
+---
+- name: Read and Write File Content on Localhost
+  hosts: localhost
+  tasks:
+    - name: Create a file in the local directory
+      copy:
+        content: "This is the content of the file.\n"
+        dest: "./example_file.txt"
+
+    - name: Write additional content to the file
+      command: echo "This is additional content." >> ./example_file.txt
+
+    - name: Read the content of the file
+      command: cat ./example_file.txt
+      register: file_content
+
+    - name: Print the output of the file content
+      debug:
+        var: file_content.stdout_lines

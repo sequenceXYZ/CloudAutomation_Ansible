@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: update package manager
+      apt:
+        update_cache: yes
+    - name: install LAMP stack
+      become: yes
+      apt:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        packages:
+          - apache2
+          - mysql-server
+          - php

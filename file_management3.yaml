@@ -1,0 +1,14 @@
+---
+- name: file management
+  hosts: hosts
+  become: yes
+
+  tasks:
+    - name: create the folder
+      file:
+        path: "/home/ubuntu/remote/{{ item }}"
+        state: directory
+      with_items:
+        - file1
+        - file2
+        - file3

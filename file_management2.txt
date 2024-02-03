@@ -1,0 +1,7 @@
+Task: create playbook that creates a folder and transfers the file there
+
+Task 1: create s folder in remote directory
+Modules used: file
+
+Task 2: copy the file from localhost into the folder
+Modules used: copy

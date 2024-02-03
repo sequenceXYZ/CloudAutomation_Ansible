@@ -1,0 +1,9 @@
+Task: install LAMP stack
+
+1. create a playbook (empty file with .yaml extension)
+2. it should be executed against all managed hosts
+3. Task 1: update apt cache
+4. Task 2: install LAMP stack
+5. Run the playbook using the following command:
+ansible-playbook <playbook_name>
+6. Check if the LAMP stack is installed - open browser and copy public IP address

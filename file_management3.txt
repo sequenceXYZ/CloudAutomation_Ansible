@@ -1,0 +1,4 @@
+Task: create a playbook that creates multiple files using a loop
+
+Task 1: create multiple files in remote directory
+Modules used: file

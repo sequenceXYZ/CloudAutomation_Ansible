@@ -1,0 +1,20 @@
+---
+- name: Check services on the host
+  hosts: hosts
+  gather_facts: true
+  tasks:
+    - name: Check Apache service status
+      command: systemctl status apache2
+      register: apache_status
+
+    - name: Display Apache service status
+      debug:
+        var: apache_status.stdout_lines
+
+    - name: Check MySQL service status
+      command: systemctl status mysql
+      register: mysql_status
+
+    - name: Display MySQL service status
+      debug:
+        var: mysql_status.stdout_lines

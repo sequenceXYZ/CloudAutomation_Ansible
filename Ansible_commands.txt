@@ -1,0 +1,72 @@
+Ansible
+
+Step 1
+# create AWS EC2 instances, Ubuntu, 2 pcs - control node and worker node
+
+Step 2
+# generate ssh key-pair
+ssh-keygen
+cd .ssh/
+cat id_rsa.pub
+
+# copy contents of .sh/id_rsa.pub to worker node .ssh/authorized_keys
+nano .ssh/authorized_keys
+
+# access worker machine by ssh from control machine
+ssh <client public ip address>
+
+Step 3
+# install ansible on control node:
+1. sudo -E apt-add-repository ppa:ansible/ansible
+2. sudo apt install ansible
+3. sudo add-apt-repository --yes --update ppa:ansible/ansible
+4. ansible --version
+
+# on control machine in ansible hosts file add worker node ip
+sudo nano /etc/ansible/hosts 
+[hosts]
+<ip>
+
+# check if ping-pong answer is received:
+ansible-inventory --list -y
+ansible all -m ping
+ansible all -a "df -h"
+
+# create playbook to install LAMP stack on worker node 'lamp.yaml' and run the command
+ansible-playbook lamp.yaml
+
+# check running installation by copy public ip in browser
+# if not available, check:
+- instance security group
+- copy instance public ip in browser
+
+
+Ad-Hoc commands
+# simple commands to run from control node:
+# syntax:
+ansible <target_node> -i <inventory_file> -m <module> -a <arguments>
+Example:
+ansible webservers -i hosts.ini -m ansible.builtin.copy -a "src=/etc/file1.txt dest=/etc/folder"
+
+# create a file on hosts
+ansible hosts -a "touch file.txt"
+
+# Create file in remote directory:
+ansible hosts -m file -a "path=/home/ubuntu/Agnija.txt state=touch"
+
+# copy local file to remote directory:
+ansible hosts -m copy -a "src=/home/ubuntu/file.txt dest=/home/ubuntu/directory"
+
+# ansible restart apache2 service on hosts
+ansible hosts -m service -a "name=apache2 state=restarted" --become
+
+
+# install tree on ubunty host, need sudo privilege
+ansible hosts -m apt -a "name=tree state=present" --become
+
+# uninstall tree:
+ansible hosts -m apt -a "name=tree state=absent" --become
+
+# reboot the node:
+ansible hosts -m reboot --become
+

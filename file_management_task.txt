@@ -1,0 +1,13 @@
+Task: create playbook that creates a file on localhost and prints out the content
+
+Task 1: create a file in local directory
+Modules used: copy
+
+Task 2: read the content of the file
+Modules used: command, register
+
+Task 3: read out the content of the file
+Modules used: debug
+
+
+

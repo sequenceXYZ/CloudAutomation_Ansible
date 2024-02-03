@@ -1,0 +1,11 @@
+Task 1: check apache2 service
+Modules used: command, register
+
+Task 2: display output
+Modules used: debug
+
+Task 3: check mysql service
+Modules used: command, register
+
+Task 4: display output
+Modules used: debug

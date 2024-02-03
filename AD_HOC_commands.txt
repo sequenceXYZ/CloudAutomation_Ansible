@@ -1,0 +1,28 @@
+Ad-Hoc commands
+# simple commands to run from control node:
+# syntax:
+ansible <target_node> -i <inventory_file> -m <module> -a <arguments>
+Example:
+ansible webservers -i hosts.ini -m ansible.builtin.copy -a "src=/etc/file1.txt dest=/etc/folder"
+
+# create a file on hosts
+ansible hosts -a "touch file.txt"
+
+# Create file in remote directory:
+ansible hosts -m file -a "path=/home/ubuntu/Agnija.txt state=touch"
+
+# copy local file to remote directory:
+ansible hosts -m copy -a "src=/home/ubuntu/file.txt dest=/home/ubuntu/directory"
+
+# ansible restart apache2 service on hosts
+ansible hosts -m service -a "name=apache2 state=restarted" --become
+
+
+# install tree on ubunty host, need sudo privilege
+ansible hosts -m apt -a "name=tree state=present" --become
+
+# uninstall tree:
+ansible hosts -m apt -a "name=tree state=absent" --become
+
+# reboot the node:
+ansible hosts -m reboot --become

@@ -1,0 +1,32 @@
+---
+- name: Install Docker on hosts
+  hosts: <your_target_host_or_group>
+  become: yes
+  tasks:
+    - name: Install Docker requirements
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+
+    - name: Add Docker apt repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Docker (docker-ce)
+      apt:
+        name: docker-ce
+        state: present

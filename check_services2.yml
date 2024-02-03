@@ -1,0 +1,25 @@
+---
+- name: Check services on the host
+  hosts: hosts
+  become: yes
+
+  tasks:
+    - name: Check Apache service status
+      command: systemctl status apache2
+      register: apache_status
+      ignore_errors: true
+
+    - name: Display Apache service status
+      debug:
+        msg: "{{ apache_status.stdout }}"
+      when: apache_status.rc == 0
+
+    - name: Check MySQL service status
+      command: systemctl status mysql
+      register: mysql_status
+      ignore_errors: true
+
+    - name: Display MySQL service status
+      debug:
+        msg: "{{ mysql_status.stdout_lines }}"
+      when: mysql_status.rc == 0

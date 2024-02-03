@@ -1,0 +1,16 @@
+---
+- name: Create Folder and Copy File
+  hosts: your_target_host_or_group
+  become: yes
+  tasks:
+    - name: Create a folder in the remote directory
+      file:
+        path: "/path/to/remote/folder"
+        state: directory
+      become: yes
+
+    - name: Copy the file from localhost to the remote folder
+      copy:
+        src: "path/to/local/file.txt"
+        dest: "/path/to/remote/folder/"
+      become: yes

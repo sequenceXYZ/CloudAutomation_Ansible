@@ -1,0 +1,16 @@
+Task: create a playbook that installs Docker.
+
+Task 1: install Docker reqirements
+Modules used: apt
+
+Task 2: add Docker GPG key
+Modules used: apt_key
+
+Task 3: add Docker apt repo
+Modules used: apt_repository
+
+Task 4: update apt cache
+Modules used: apt_key
+
+Task 5: install docker (docker-ce)
+Modules used: apt
